@@ -1,5 +1,6 @@
 package br.com.devfeh.cm.modelos;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -25,4 +26,53 @@ public class CampTeste {
 		assertTrue(resultado);
 		
 	}
+	
+	@Test
+	void testeVizinhoRealDistancia2() {
+		Campo vizinho = new Campo(1, 4);
+		
+		boolean resultado = campo.adicionarVizinho(vizinho);	
+		
+		assertFalse(resultado);
+		
+	}
+	
+	@Test
+	void testeVizinhoRealDistancia3() {
+		Campo vizinho = new Campo(2, 5);
+		
+		boolean resultado = campo.adicionarVizinho(vizinho);	
+		
+		assertFalse(resultado);
+		
+	}
+	
+	@Test
+	void testeVizinhoRealDistancia4() {
+		Campo vizinho = new Campo(4, 4);
+		
+		boolean resultado = campo.adicionarVizinho(vizinho);	
+		
+		assertTrue(resultado);
+		
+	}
+	
+	@Test
+	void testeAlternarMarcador() {
+		campo.alternarMarcacao();
+		assertTrue(campo.isMarcado());
+	}
+	
+	@Test
+	void testeMarcado() {
+		assertFalse(campo.isMarcado());
+	}
+	
+	@Test
+	void testeAlternarMarcadorDuasChamada() {
+		campo.alternarMarcacao();
+		campo.alternarMarcacao();
+		assertFalse(campo.isMarcado());
+	}
+	
 }	
