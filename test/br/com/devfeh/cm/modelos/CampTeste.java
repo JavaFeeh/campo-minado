@@ -1,11 +1,13 @@
 package br.com.devfeh.cm.modelos;
 
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import excecao.ExplosaoException;
 import modelo.Campo;
 
 public class CampTeste {
@@ -75,4 +77,31 @@ public class CampTeste {
 		assertFalse(campo.isMarcado());
 	}
 	
+	@Test
+	void abrirNaoMinadoNaoMarcado() {
+		
+		assertTrue(campo.abrir());
+	}
+	
+	@Test
+	void abrirNaoMinadoestaMarcado() {
+		campo.alternarMarcacao();
+		assertFalse(campo.abrir());
+	}
+	
+	@Test
+	void abrirMinadoeMarcado() {
+		campo.alternarMarcacao();
+		campo.minar();
+		assertFalse(campo.abrir());
+	}
+	
+	@Test
+	void abrirMinadoeNaoMarcado() {
+		campo.minar();
+		
+		assertThrows(ExplosaoException.class, () -> {
+			campo.abrir();
+		});
+	}
 }	
